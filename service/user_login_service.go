@@ -1,9 +1,9 @@
 package service
 
 import (
-	"boottest/common"
-	"boottest/model"
-	"boottest/serializer"
+	"bottest/common"
+	"bottest/model"
+	"bottest/serializer"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

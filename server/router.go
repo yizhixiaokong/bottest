@@ -1,8 +1,8 @@
 package server
 
 import (
-	"boottest/api"
-	"boottest/middleware"
+	"bottest/api"
+	"bottest/middleware"
 	"os"
 
 	"github.com/gin-gonic/gin"

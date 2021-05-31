@@ -1,9 +1,9 @@
 package service
 
 import (
-	"boottest/common"
-	"boottest/model"
-	"boottest/serializer"
+	"bottest/common"
+	"bottest/model"
+	"bottest/serializer"
 )
 
 // UserRegisterService 管理用户注册服务

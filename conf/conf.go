@@ -1,10 +1,10 @@
 package conf
 
 import (
-	"boottest/cache"
-	"boottest/model"
-	"boottest/pkg/logger"
-	"boottest/util"
+	"bottest/cache"
+	"bottest/model"
+	"bottest/pkg/logger"
+	"bottest/util"
 	"fmt"
 	"log"
 	"os"

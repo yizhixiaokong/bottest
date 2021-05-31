@@ -1,7 +1,7 @@
 package model
 
 import (
-	"boottest/pkg/logger"
+	"bottest/pkg/logger"
 	"strings"
 
 	"github.com/gin-gonic/gin"

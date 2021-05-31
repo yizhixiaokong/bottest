@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"boottest/util"
+	"bottest/util"
 	"os"
 	"strconv"
 

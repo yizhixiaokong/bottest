@@ -1,10 +1,10 @@
 package api
 
 import (
-	"boottest/common"
-	"boottest/pkg/logger"
-	"boottest/serializer"
-	"boottest/service"
+	"bottest/common"
+	"bottest/pkg/logger"
+	"bottest/serializer"
+	"bottest/service"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

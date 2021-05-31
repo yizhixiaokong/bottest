@@ -1,8 +1,8 @@
 package main
 
 import (
-	"boottest/conf"
-	"boottest/server"
+	"bottest/conf"
+	"bottest/server"
 )
 
 func main() {

@@ -1,9 +1,9 @@
 package api
 
 import (
-	"boottest/common"
-	"boottest/model"
-	"boottest/pkg/logger"
+	"bottest/common"
+	"bottest/model"
+	"bottest/pkg/logger"
 	"bytes"
 	"encoding/json"
 	"net/http"

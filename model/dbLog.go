@@ -1,7 +1,7 @@
 package model
 
 import (
-	"boottest/pkg/logger"
+	"bottest/pkg/logger"
 )
 
 // GormLogger struct

@@ -1,8 +1,8 @@
 package api
 
 import (
-	"boottest/common"
-	"boottest/model"
+	"bottest/common"
+	"bottest/model"
 
 	"github.com/gin-gonic/gin"
 )

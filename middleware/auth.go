@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"boottest/common"
-	"boottest/model"
+	"bottest/common"
+	"bottest/model"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"boottest/pkg/logger"
+	"bottest/pkg/logger"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

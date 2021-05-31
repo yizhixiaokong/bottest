@@ -1,4 +1,4 @@
-module boottest
+module bottest
 
 go 1.16
 
