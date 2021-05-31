@@ -14,7 +14,7 @@ import (
 func UserRegister(c *gin.Context) {
 	var service service.UserRegisterService
 	if err := c.ShouldBind(&service); err != nil {
-		logger.Info(err.Error())
+		logger.Warn(err.Error())
 		common.ResJson(c, nil, common.ErrInvalidParams(err))
 		return
 	}
@@ -27,7 +27,7 @@ func UserRegister(c *gin.Context) {
 func UserLogin(c *gin.Context) {
 	var service service.UserLoginService
 	if err := c.ShouldBind(&service); err != nil {
-		logger.Info(err.Error())
+		logger.Warn(err.Error())
 		common.ResJson(c, nil, common.ErrInvalidParams(err))
 		return
 	}
