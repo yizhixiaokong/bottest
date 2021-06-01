@@ -72,6 +72,7 @@ func ErrServer() *ResError       { return NewError(StatusServerError, MsgServerE
 func ErrInvalidParam() *ResError { return NewError(StatusInvalidParam, MsgInvalidParam) }
 func ErrUnrealized() *ResError   { return NewError(StatusUnrealized, MsgUnrealized) }
 
-func ErrNotExist() *ResError { return NewError(StatusTargetNotExist, MsgTargetNotExist) }
-func ErrIsExist() *ResError  { return NewError(StatusTargetIsExist, MsgTargetIsExist) }
-func ErrExec() *ResError     { return NewError(StatusCantExce, MsgCantExce) }
+func ErrNotExist() *ResError  { return NewError(StatusTargetNotExist, MsgTargetNotExist) }
+func ErrIsExist() *ResError   { return NewError(StatusTargetIsExist, MsgTargetIsExist) }
+func ErrCantExec() *ResError  { return NewError(StatusCantExce, MsgCantExce) }
+func ErrExecFaild() *ResError { return NewError(StatusExceFaild, MsgExceFaild) }

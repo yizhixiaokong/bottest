@@ -17,6 +17,7 @@ const (
 	StatusTargetNotExist = 3001 //目标记录不存在
 	StatusTargetIsExist  = 3002 //目标记录已存在
 	StatusCantExce       = 3003 //不能执行
+	StatusExceFaild      = 3004 //执行失败
 
 	StatusNeedLogin = 4001 //未登录
 )
@@ -33,6 +34,7 @@ const (
 	MsgTargetNotExist = "目标记录不存在"
 	MsgTargetIsExist  = "同名记录已存在"
 	MsgCantExce       = "不能执行"
+	MsgExceFaild      = "执行失败"
 
 	//user
 	MsgNeedLogin = "未登录"

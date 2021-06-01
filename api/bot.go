@@ -2,7 +2,8 @@ package api
 
 import (
 	"bottest/common"
-	"bottest/model"
+	"bottest/util"
+
 	"bottest/service"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 
 // BotMessage 接收bot消息接口
 func BotMessage(c *gin.Context) {
-	err := service.BotReceivePost(model.HttpContext{Ctx: c})
+	err := service.BotReceivePost(util.HttpContext{Ctx: c})
 	common.ResJson(c, nil, err)
 	return
 }
