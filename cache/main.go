@@ -1,7 +1,7 @@
 package cache
 
 import (
-	"bottest/util"
+	"bottest/pkg/logger"
 	"os"
 	"strconv"
 
@@ -28,7 +28,7 @@ func Redis() {
 	_, err := client.Ping().Result()
 
 	if err != nil {
-		util.Log().Panic("连接Redis不成功", err)
+		logger.Errorf("连接Redis不成功:%v", err)
 	}
 
 	RedisClient = client
