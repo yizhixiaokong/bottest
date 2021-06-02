@@ -63,7 +63,11 @@ var httpPrefix = "http://"
 func SendHttpPost(serverIP string, url string, reqData interface{}) (gjson.Result, error) {
 
 	if !strings.HasPrefix(url, httpPrefix) {
-		url = httpPrefix + serverIP + url
+		if !strings.HasPrefix(serverIP, httpPrefix) {
+			url = httpPrefix + serverIP + url
+		} else {
+			url = serverIP + url
+		}
 	}
 	contentType := "application/json; charset=utf-8"
 
@@ -109,11 +113,12 @@ func SendHttpPost(serverIP string, url string, reqData interface{}) (gjson.Resul
 
 func SendHttpPut(serverIP string, url string, reqData interface{}, respData interface{}) (gjson.Result, error) {
 
-	var respModel common.ResponseModel
-	respModel.ErrorCode = -1
-
 	if !strings.HasPrefix(url, httpPrefix) {
-		url = httpPrefix + serverIP + url
+		if !strings.HasPrefix(serverIP, httpPrefix) {
+			url = httpPrefix + serverIP + url
+		} else {
+			url = serverIP + url
+		}
 	}
 	contentType := "application/json; charset=utf-8"
 
@@ -159,11 +164,12 @@ func SendHttpPut(serverIP string, url string, reqData interface{}, respData inte
 
 func SendHttpGet(serverIP string, url string, reqData map[string]string, respData interface{}) (gjson.Result, error) {
 
-	var respModel common.ResponseModel
-	respModel.ErrorCode = -1
-
 	if !strings.HasPrefix(url, httpPrefix) {
-		url = httpPrefix + serverIP + url
+		if !strings.HasPrefix(serverIP, httpPrefix) {
+			url = httpPrefix + serverIP + url
+		} else {
+			url = serverIP + url
+		}
 	}
 
 	client := &http.Client{
@@ -209,11 +215,12 @@ func SendHttpGet(serverIP string, url string, reqData map[string]string, respDat
 
 func SendHttpDelete(serverIP string, url string, reqData map[string]string, respData interface{}) (gjson.Result, error) {
 
-	var respModel common.ResponseModel
-	respModel.ErrorCode = -1
-
 	if !strings.HasPrefix(url, httpPrefix) {
-		url = httpPrefix + serverIP + url
+		if !strings.HasPrefix(serverIP, httpPrefix) {
+			url = httpPrefix + serverIP + url
+		} else {
+			url = serverIP + url
+		}
 	}
 
 	client := &http.Client{
@@ -259,11 +266,13 @@ func SendHttpDelete(serverIP string, url string, reqData map[string]string, resp
 }
 
 func SendHttpDeleteJson(serverIP string, url string, reqData interface{}, respData interface{}) (gjson.Result, error) {
-	var respModel common.ResponseModel
-	respModel.ErrorCode = -1
 
 	if !strings.HasPrefix(url, httpPrefix) {
-		url = httpPrefix + serverIP + url
+		if !strings.HasPrefix(serverIP, httpPrefix) {
+			url = httpPrefix + serverIP + url
+		} else {
+			url = serverIP + url
+		}
 	}
 	contentType := "application/json; charset=utf-8"
 
