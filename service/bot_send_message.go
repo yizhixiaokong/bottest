@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	sendIP string = "http://127.0.0.1:5700"
+	sendIP string = "127.0.0.1:5700"
 
 	SendPrivateMsg string = "/send_private_msg"
 	SendGroupMsg   string = "/send_group_msg"
@@ -41,7 +41,7 @@ func BotSendPrivateMessage(userID int64, msg string) common.WebError {
 
 	res, err := util.SendHttpPost(sendIP, SendPrivateMsg, reqMsg)
 	if err != nil {
-		logger.Errorf("BotSendPrivateMessage :SendHttpPost err")
+		logger.Errorf("BotSendPrivateMessage :SendHttpPost err:%v", err)
 		return common.ErrServer()
 	}
 	if res.Get("status").Str != "ok" {
@@ -59,7 +59,7 @@ func BotSendGroupMessage(groupID int64, msg string) common.WebError {
 
 	res, err := util.SendHttpPost(sendIP, SendGroupMsg, reqMsg)
 	if err != nil {
-		logger.Errorf("BotSendPrivateMessage :SendHttpPost err")
+		logger.Errorf("BotSendPrivateMessage :SendHttpPost err:%v", err)
 		return common.ErrServer()
 	}
 	if res.Get("status").Str != "ok" {
