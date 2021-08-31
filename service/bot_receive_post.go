@@ -2,7 +2,9 @@ package service
 
 import (
 	"bottest/common"
+	"bottest/pkg/convert"
 	"bottest/pkg/logger"
+	"os"
 
 	"github.com/tidwall/gjson"
 )
@@ -50,7 +52,8 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 		logger.Infof("Got a private message:\n")
 		logger.Infof("from:%v", userID)
 		logger.Infof("message:%v", message)
-		if userID == 535310511 {
+		daddyUser := os.Getenv("DADDY_USER")
+		if daddyUser != "" && userID == convert.ToInt64(daddyUser) {
 			resMsg := "我已经收到你的消息了，内容是：{ " + message + " }"
 			err := BotSendMessage(userID, resMsg, "private")
 			if err != nil {
