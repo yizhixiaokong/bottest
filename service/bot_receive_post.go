@@ -58,7 +58,7 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 			resMsg = "妈妈说不可以和陌生人说话的"
 		} else {
 			resMsg = "我已经收到你的消息了，内容是：{ " + message + " }\n"
-			resMsg += BotReceiveMessageInfo(message)
+			resMsg += BotReceiveMessageInfo(message, false)
 		}
 		err := BotSendMessage(userID, resMsg, "private")
 		if err != nil {
@@ -68,10 +68,26 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 	case "group":
 		//群聊
 		logger.Infof("Got a group message:")
-		logger.Infof("group:%v", getter.Get("group_id"))
-		logger.Infof("from:%v", getter.Get("user_id"))
-		logger.Infof("message:%v", getter.Get("message"))
 
+		groupID := getter.Get("group_id").Int()
+		userID := getter.Get("user_id").Int()
+		message := getter.Get("message").Str
+		rawMessage := getter.Get("raw_message").Str
+		_ = rawMessage
+		logger.Infof("group:%v", groupID)
+		logger.Infof("from:%v", userID)
+		logger.Infof("message:%v", message)
+		// logger.Infof("raw_message:%v", rawMessage)
+
+		//todo 2021-09-01 16:24:20 hxx 暂定必须艾特才能触发，之后改成部分不用艾特（如自动回复）即可触发
+		if isAt, msg := IsAt(ReturnSelf(), message); isAt {
+
+			resMsg := BotReceiveMessageInfo(msg, true)
+			err := BotSendMessage(groupID, resMsg, "group")
+			if err != nil {
+				logger.Warnf("send message err :to:%d ,msg:%s", groupID, resMsg)
+			}
+		}
 	}
 
 	return nil
@@ -91,7 +107,7 @@ func BotReceiveRequest(getter ResultGetter) common.WebError {
 	return nil
 }
 
-func BotReceiveMessageInfo(msg string) string {
+func BotReceiveMessageInfo(msg string, group bool) string {
 	//todo 暂定回复消息分三个模块：命令、功能、自动回复。
 
 	//todo暂定命令只能管理员用户使用
