@@ -2,7 +2,6 @@ package service
 
 import (
 	"bottest/pkg/convert"
-	"bottest/pkg/logger"
 	"os"
 	"strings"
 )
@@ -32,9 +31,7 @@ func IsAt(userID int64, msg string) (bool, string) {
 	atLen := len(at)
 	index := strings.Index(msg, at)
 	if index >= 0 {
-		sss := string([]rune(msg)[:index]) + string([]rune(msg)[index+atLen:])
-		logger.Infof("sss:%v", sss)
-		return true, sss
+		return true, string([]rune(msg)[:index]) + string([]rune(msg)[index+atLen:])
 	}
 	return false, msg
 }

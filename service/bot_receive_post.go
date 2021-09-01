@@ -122,7 +122,10 @@ func BotReceiveMessageInfo(msg string, group bool) string {
 	if if_help, res := HelpMenu(msg); if_help {
 		return res
 	}
-	// /random n 返回0~n-1的一个数
+	// /random n 返回0~n的一个数
+	if if_random, res := Random(msg); if_random {
+		return res
+	}
 
 	// ——————————————————自动回复——————————————————
 	// 用/add命令添加的自动回复，支持部分匹配触发
