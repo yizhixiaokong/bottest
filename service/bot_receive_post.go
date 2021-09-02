@@ -47,9 +47,10 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 		message := getter.Get("message").Str
 		rawMessage := getter.Get("raw_message").Str
 		_ = rawMessage
-		logger.Infof("Got a private message:\n")
-		logger.Infof("from:%v", userID)
-		logger.Infof("message:%v", message)
+		// logger.Infof("Got a private message:")
+		// logger.Infof("from:%v", userID)
+		// logger.Infof("message:%v", message)
+		logger.Infof("Got a private message from user:%v message:%v", userID, message)
 
 		var resMsg string
 
@@ -67,28 +68,28 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 
 	case "group":
 		//群聊
-		logger.Infof("Got a group message:")
+		// logger.Infof("Got a group message:")
 
 		groupID := getter.Get("group_id").Int()
 		userID := getter.Get("user_id").Int()
 		message := getter.Get("message").Str
 		rawMessage := getter.Get("raw_message").Str
 		_ = rawMessage
-		logger.Infof("group:%v", groupID)
-		logger.Infof("from:%v", userID)
-		logger.Infof("message:%v", message)
+		logger.Infof("Got a group message from group:%v user:%v message:%v", groupID, userID, message)
+		// logger.Infof("group:%v", groupID)
+		// logger.Infof("from:%v", userID)
+		// logger.Infof("message:%v", message)
 		// logger.Infof("raw_message:%v", rawMessage)
 
-		//todo 2021-09-01 16:24:20 hxx 暂定必须艾特才能触发，之后改成部分不用艾特（如自动回复）即可触发
-		if isAt, msg := IsAt(ReturnSelf(), message); isAt {
-
-			// logger.Infof("msg:%v", msg)
-			resMsg := BotReceiveMessageInfo(msg, true)
+		// logger.Infof("msg:%v", msg)
+		resMsg := BotReceiveMessageInfo(message, true)
+		if resMsg != "" {
 			// logger.Infof("resMsg:%v", resMsg)
 			err := BotSendMessage(groupID, resMsg, "group")
 			if err != nil {
 				logger.Warnf("send message err :to:%d ,msg:%s", groupID, resMsg)
 			}
+
 		}
 	}
 
@@ -110,9 +111,23 @@ func BotReceiveRequest(getter ResultGetter) common.WebError {
 }
 
 func BotReceiveMessageInfo(msg string, group bool) string {
+
+	//检测AT是否符合要求
+	checkAt := func(f func(str string) (bool, string), needAt bool) (bool, string) {
+		if !needAt {
+			return f(msg)
+		}
+		isAt, m := IsAt(ReturnSelf(), msg)
+		if isAt {
+			return f(m)
+		}
+		return false, ""
+	}
+
 	//todo 暂定回复消息分三个模块：命令、功能、自动回复。
 
 	//todo暂定命令只能管理员用户使用
+	// 以下按排列顺序判定触发优先级
 	// ——————————————————命令——————————————————
 	// todo 2021-09-01 14:33:35 hxx 增加对话注册命令，注册的对话保存数据库，暂定所有群通用
 	// #add 添加自动回复
@@ -121,11 +136,11 @@ func BotReceiveMessageInfo(msg string, group bool) string {
 
 	// ——————————————————功能——————————————————
 	// /help 返回功能菜单
-	if if_help, res := HelpMenu(msg); if_help {
+	if if_help, res := checkAt(HelpMenu, false); if_help {
 		return res
 	}
 	// /random n 返回0~n的一个数
-	if if_random, res := Random(msg); if_random {
+	if if_random, res := checkAt(Random, false); if_random {
 		return res
 	}
 
@@ -133,6 +148,6 @@ func BotReceiveMessageInfo(msg string, group bool) string {
 	// 用/add命令添加的自动回复，支持部分匹配触发
 
 	// ——————————————————其他回复——————————————————
-
-	return RandomAnswer()
+	_, str := checkAt(RandomAnswer, true)
+	return str
 }

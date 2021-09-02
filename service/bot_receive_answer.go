@@ -13,7 +13,7 @@ var OtherAnswer = []string{
 	"这多少有些超出了我的理解范围",
 }
 
-func RandomAnswer() string {
+func RandomAnswer(s string) (bool, string) {
 	r := rand.Intn(len(OtherAnswer))
-	return OtherAnswer[r]
+	return true, OtherAnswer[r]
 }
