@@ -82,7 +82,9 @@ func BotReceiveMessage(getter ResultGetter) common.WebError {
 		//todo 2021-09-01 16:24:20 hxx 暂定必须艾特才能触发，之后改成部分不用艾特（如自动回复）即可触发
 		if isAt, msg := IsAt(ReturnSelf(), message); isAt {
 
+			// logger.Infof("msg:%v", msg)
 			resMsg := BotReceiveMessageInfo(msg, true)
+			// logger.Infof("resMsg:%v", resMsg)
 			err := BotSendMessage(groupID, resMsg, "group")
 			if err != nil {
 				logger.Warnf("send message err :to:%d ,msg:%s", groupID, resMsg)

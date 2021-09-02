@@ -27,11 +27,14 @@ func IsDaddy(userID int64) bool {
 
 // IsAt 判断是否被艾特
 func IsAt(userID int64, msg string) (bool, string) {
-	at := "[CQ:at,qq=" + convert.ToString(userID) + "] "
+	// logger.Infof("userID :%v", userID)
+	// logger.Infof("msg :%v", msg)
+	at := "[CQ:at,qq=" + convert.ToString(userID) + "]"
 	atLen := len(at)
 	index := strings.Index(msg, at)
+	// logger.Infof("index:%v", index)
 	if index >= 0 {
-		return true, string([]rune(msg)[:index]) + string([]rune(msg)[index+atLen:])
+		return true, string([]byte(msg)[:index]) + string([]byte(msg)[index+atLen:])
 	}
 	return false, msg
 }
