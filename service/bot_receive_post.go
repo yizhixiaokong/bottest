@@ -114,7 +114,7 @@ func BotReceiveMessageInfo(msg string, group bool) string {
 
 	//检测AT是否符合要求
 	checkAt := func(f func(str string) (bool, string), needAt bool) (bool, string) {
-		if !needAt {
+		if !needAt || !group {
 			return f(msg)
 		}
 		isAt, m := IsAt(ReturnSelf(), msg)
