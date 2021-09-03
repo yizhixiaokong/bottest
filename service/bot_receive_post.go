@@ -136,18 +136,26 @@ func BotReceiveMessageInfo(msg string, group bool) string {
 
 	// ——————————————————功能——————————————————
 	// /help 返回功能菜单
-	if if_help, res := checkAt(HelpMenu, false); if_help {
+	if if_help, res := checkAt(GetHelpMenu, false); if_help {
 		return res
 	}
 	// /random n 返回0~n的一个数
-	if if_random, res := checkAt(Random, false); if_random {
+	if if_random, res := checkAt(GetRandom, false); if_random {
 		return res
 	}
 
 	// ——————————————————自动回复——————————————————
-	// 用/add命令添加的自动回复，支持部分匹配触发
+	// 内置的自动回复
+	if if_random, res := checkAt(GetHelloAnswer, true); if_random {
+		return res
+	}
+
+	// 用/add命令添加的自动回复，支持关键词触发
+	if if_random, res := checkAt(GetAutoAnswer, true); if_random {
+		return res
+	}
 
 	// ——————————————————其他回复——————————————————
-	_, str := checkAt(RandomAnswer, true)
+	_, str := checkAt(GetRandomAnswer, true)
 	return str
 }
